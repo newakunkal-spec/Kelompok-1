@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumi — IPA Assignment Group 1, Class 7C</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0ff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Animated starfield background */
+.stars {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(10, 10, 30, 0.95);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #00d4ff, #7b2dff, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #a0a8ff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fff;
+    background: rgba(100, 150, 255, 0.15);
+    border-color: rgba(100, 150, 255, 0.3);
+    box-shadow: 0 0 20px rgba(100, 150, 255, 0.2);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero-content .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #8899ff;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.hero-content .class-info {
+    font-size: 1.1rem;
+    color: #6677cc;
+    margin-bottom: 40px;
+}
+
+.hero-planet {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    margin: 30px auto;
+    position: relative;
+    box-shadow: 0 0 60px rgba(255, 200, 100, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Content Sections */
+.content-section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 30px;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    margin: 15px auto 0;
+}
+
+/* Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: rgba(20, 20, 50, 0.6);
+    border: 1px solid rgba(100, 150, 255, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(100, 150, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(100, 150, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.card p {
+    color: #a0a8cc;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(20, 25, 60, 0.7);
+    border-left: 4px solid;
+    border-radius: 0 15px 15px 0;
+    padding: 25px 30px;
+    margin: 25px 0;
+    backdrop-filter: blur(10px);
+}
+
+.info-box h4 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.info-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-box li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.info-box li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: inherit;
+}
+
+/* Planet Detail Page Styles */
+.planet-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 30px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.planet-hero-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.planet-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.planet-sphere {
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    position: relative;
+    animation: planetRotate 20s linear infinite, float 6s ease-in-out infinite;
+}
+@keyframes planetRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.planet-info h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 15px;
+}
+
+.planet-info .planet-tagline {
+    font-size: 1.2rem;
+    color: #8899ff;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.planet-info p {
+    line-height: 1.8;
+    color: #c0c8ee;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+/* Data Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: rgba(20, 20, 50, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.data-table th {
+    background: rgba(100, 150, 255, 0.1);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: #00d4ff;
+}
+
+.data-table tr:hover {
+    background: rgba(100, 150, 255, 0.05);
+}
+
+/* Footer */
+footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(5, 5, 20, 0.95);
+    border-top: 1px solid rgba(100, 150, 255, 0.1);
+    padding: 50px 30px 30px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.group-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.member-tag {
+    background: rgba(100, 150, 255, 0.1);
+    border: 1px solid rgba(100, 150, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #a0a8ff;
+}
+
+.creator {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.creator-name {
+    font-family: 'Orbitron', sans-serif;
+    color: #00d4ff;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .planet-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .planet-sphere {
+        width: 200px; height: 200px;
+    }
+    .nav-links {
+        gap: 4px;
+    }
+    .nav-links a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Scroll animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Orbit animation for home page */
+.orbit-container {
+    position: relative;
+    width: 400px; height: 400px;
+    margin: 40px auto;
+}
+
+.orbit-ring {
+    position: absolute;
+    border: 1px solid rgba(100, 150, 255, 0.15);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-planet {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes orbit1 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg); } }
+@keyframes orbit2 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); } }
+@keyframes orbit3 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); } }
+@keyframes orbit4 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); } }
+
+.cta-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #00d4ff, #7b2dff);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+}
+
+/* Fun Fact Box */
+.fun-fact {
+    background: rgba(255, 200, 50, 0.08);
+    border: 1px solid rgba(255, 200, 50, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+}
+.fun-fact h4 {
+    color: #ffd700;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+}
+</style>
+
+</head>
+<body>
+    <div class="stars"></div>
+    
+<nav>
+    <div class="nav-container">
+        <div class="logo">🚀 IPA Group 1</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="">🏠 Home</a></li><li><a href="mercury.html" class="">☿ Mercury</a></li><li><a href="venus.html" class="">♀ Venus</a></li><li><a href="earth.html" class="active">⊕ Earth</a></li><li><a href="mars.html" class="">♂ Mars</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <section class="planet-hero">
+        <div class="planet-hero-grid">
+            <div class="planet-visual">
+                <div class="planet-sphere" style="background: radial-gradient(circle at 30% 30%, #4fc3f7, #2e7d32, #1565c0, #0d3b66); box-shadow: 0 0 80px rgba(79, 195, 247, 0.4), inset -30px -30px 60px rgba(0,0,0,0.5);"></div>
+            </div>
+            <div class="planet-info">
+                <h1 style="color: #4fc3f7;">⊕ Bumi</h1>
+                <p class="planet-tagline">"Planet Biru yang Memelihara Kehidupan"</p>
+                <p>
+                    <strong>Bumi</strong> adalah planet ketiga dari Matahari dan satu-satunya planet yang diketahui memiliki kehidupan. Dari luar angkasa, Bumi tampak sebagai bola biru yang indah — warna biru berasal dari lautan yang menutupi 71% permukaannya, sementara warna hijau dan coklat berasal dari daratan dan vegetasi.
+                </p>
+                <p>
+                    Bumi berada di zona "habitable" (dapat dihuni) Matahari — tidak terlalu panas seperti Venus dan tidak terlalu dingin seperti Mars. Jarak yang tepat ini memungkinkan air ada dalam bentuk cair, yang merupakan kunci utama kehidupan seperti yang kita kenal.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title fade-in">🔬 Karakteristik Fisik</h2>
+
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-icon">🌊</div>
+                <h3>Air dalam Bentuk Cair</h3>
+                <p>Bumi adalah satu-satunya planet dengan <strong>air cair</strong> di permukaan. Air menutupi 71% permukaan Bumi dan memainkan peran vital dalam mengatur suhu planet melalui siklus air. Air juga merupakan pelarut universal yang memungkinkan reaksi kimia kompleks yang diperlukan untuk kehidupan.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🛡️</div>
+                <h3>Atmosfer Pelindung</h3>
+                <p>Atmosfer Bumi terdiri dari <strong>78% nitrogen, 21% oksigen, dan 1% gas lainnya</strong>. Lapisan ozon melindungi makhluk hidup dari radiasi UV berbahaya. Atmosfer juga menyimpan panas dan mendistribusikannya, menciptakan iklim yang stabil.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🧲</div>
+                <h3>Medan Magnet yang Kuat</h3>
+                <p>Bumi memiliki <strong>medan magnet yang dihasilkan oleh inti cair besi-nikel</strong> yang berputar. Medan magnet ini melindungi planet dari radiasi berbahaya dan partikel bermuatan dari Matahari (angin Matahari) dan ruang angkasa (sinar kosmik).</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🌙</div>
+                <h3>Bulan yang Besar</h3>
+                <p>Bulan Bumi adalah satelit alami terbesar relatif terhadap planet induknya di Tata Surya — diameter Bulan adalah <strong>27% dari diameter Bumi</strong>. Gravitasi Bulan menyebabkan pasang surut laut dan memperlambat rotasi Bumi seiring waktu.</p>
+            </div>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #4fc3f7;">
+            <h4 style="color: #4fc3f7;">📊 Data Planet Bumi</h4>
+            <table class="data-table">
+                <tr><th>Parameter</th><th>Nilai</th></tr>
+                <tr><td>Jarak dari Matahari</td><td>149,6 juta km (1 SA)</td></tr>
+                <tr><td>Diameter</td><td>12.742 km</td></tr>
+                <tr><td>Massa</td><td>5,972 × 10²⁴ kg</td></tr>
+                <tr><td>Kepadatan</td><td>5,51 g/cm³</td></tr>
+                <tr><td>Gravitasi Permukaan</td><td>9,807 m/s²</td></tr>
+                <tr><td>Periode Orbit</td><td>365,25 hari (1 tahun)</td></tr>
+                <tr><td>Periode Rotasi</td><td>23 jam 56 menit (1 hari)</td></tr>
+                <tr><td>Suhu Rata-rata Permukaan</td><td>15°C</td></tr>
+                <tr><td>Tekanan Atmosfer</td><td>1 atm (101,325 kPa)</td></tr>
+                <tr><td>Jumlah Bulan</td><td>1 (Bulan)</td></tr>
+            </table>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #2e7d32;">
+            <h4 style="color: #2e7d32;">🔍 Penjelasan Ilmiah: Mengapa Bumi Dapat Dihuni?</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                Bumi memiliki kombinasi unik faktor yang memungkinkan kehidupan:
+            </p>
+            <ul style="color: #c0c8ee; line-height: 1.8; margin-top: 10px;">
+                <li><strong>Jarak yang tepat dari Matahari:</strong> Berada di "zona Goldilocks" — tidak terlalu panas, tidak terlalu dingin</li>
+                <li><strong>Atmosfer yang tepat:</strong> Komposisi gas yang melindungi dan memelihara suhu stabil</li>
+                <li><strong>Medan magnet yang kuat:</strong> Melindungi dari radiasi berbahaya</li>
+                <li><strong>Air cair:</strong> Pelarut universal yang memungkinkan reaksi kimia kehidupan</li>
+                <li><strong>Inti aktif:</strong> Menghasilkan medan magnet dan mempertahankan atmosfer</li>
+                <li><strong>Bulan yang besar:</strong> Menstabilkan kemiringan sumbu Bumi, menciptakan iklim yang stabil</li>
+                <li><strong>Lempeng tektonik:</strong> Mengatur siklus karbon dan mempertahankan atmosfer</li>
+            </ul>
+        </div>
+
+        <div class="fun-fact fade-in">
+            <h4>💡 Fakta Menarik tentang Bumi</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                <strong>Bumi bukan bola sempurna!</strong> Karena rotasinya, Bumi sedikit "membuncit" di khatulistiwa. Diameter khatulistiwa Bumi sekitar 43 km lebih besar dari diameter kutub-ke-kutub. Bentuk ini disebut <em>"geoid"</em> — bola yang sedikit terdistorsi. Selain itu, Bumi adalah satu-satunya planet yang namanya tidak berasal dari mitologi Yunani/Romawi. Nama "Earth" berasal dari bahasa Inggris kuno "eorþe" yang berarti "tanah" atau "tanah air".
+            </p>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #00d4ff;">
+            <h4 style="color: #00d4ff;">🌍 Lapisan-Lapisan Bumi</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                Bumi memiliki struktur berlapis yang kompleks:
+            </p>
+            <ul style="color: #c0c8ee; line-height: 1.8; margin-top: 10px;">
+                <li><strong>Kerak (Crust):</strong> Lapisan terluar, ketebalan 5-70 km, terdiri dari batuan silikat</li>
+                <li><strong>Mantel (Mantle):</strong> Lapisan terbesar, ketebalan ~2.900 km, terdiri dari batuan silikat yang kaya akan besi dan magnesium</li>
+                <li><strong>Inti Luar (Outer Core):</strong> Lapisan cair, ketebalan ~2.200 km, terdiri dari besi dan nikel cair</li>
+                <li><strong>Inti Dalam (Inner Core):</strong> Bola padat, diameter ~1.220 km, terdiri dari besi dan nikel padat dengan suhu ~5.500°C</li>
+            </ul>
+            <p style="color: #c0c8ee; line-height: 1.8; margin-top: 15px;">
+                Gerakan konveksi dalam mantel menggerakkan lempeng tektonik di permukaan, menyebabkan gempa bumi, letusan gunung berapi, dan pembentukan pegunungan.
+            </p>
+        </div>
+    </section>
+
+    
+<footer>
+    <div class="footer-content">
+        <h3 style="font-family: 'Orbitron', sans-serif; margin-bottom: 15px; color: #fff;">👥 Group Members</h3>
+        <div class="group-members">
+            <span class="member-tag">Haikal Rizky Aditya</span>
+            <span class="member-tag">Ardan Rasendra Sutiko</span>
+            <span class="member-tag">Azka Putra Falevi</span>
+            <span class="member-tag">Diva Davit Prananda</span>
+            <span class="member-tag">Zacky Hilmi Falevi</span>
+            <span class="member-tag">Indah Priyanti Dewi Utami</span>
+            <span class="member-tag">Livatul Janah</span>
+            <span class="member-tag">Nafiza Clara Azkayra</span>
+        </div>
+        <div class="creator">
+            <p style="color: #6677cc; font-size: 0.9rem;">Website Created & Designed by</p>
+            <p class="creator-name">✨ Haikal Rizky Aditya ✨</p>
+        </div>
+        <p style="margin-top: 20px; color: #4455aa; font-size: 0.8rem;">© 2026 IPA Assignment Group 1, Class 7C — Inner Planets Exploration</p>
+    </div>
+</footer>
+
+    
+<script>
+// Generate stars
+document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.querySelector('.stars');
+    if (starsContainer) {
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+</html>
