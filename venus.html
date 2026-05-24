@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venus — IPA Assignment Group 1, Class 7C</title>
+    
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0ff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Animated starfield background */
+.stars {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(10, 10, 30, 0.95);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #00d4ff, #7b2dff, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #a0a8ff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fff;
+    background: rgba(100, 150, 255, 0.15);
+    border-color: rgba(100, 150, 255, 0.3);
+    box-shadow: 0 0 20px rgba(100, 150, 255, 0.2);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero-content .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #8899ff;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.hero-content .class-info {
+    font-size: 1.1rem;
+    color: #6677cc;
+    margin-bottom: 40px;
+}
+
+.hero-planet {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    margin: 30px auto;
+    position: relative;
+    box-shadow: 0 0 60px rgba(255, 200, 100, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Content Sections */
+.content-section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 30px;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    margin: 15px auto 0;
+}
+
+/* Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: rgba(20, 20, 50, 0.6);
+    border: 1px solid rgba(100, 150, 255, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(100, 150, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(100, 150, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.card p {
+    color: #a0a8cc;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(20, 25, 60, 0.7);
+    border-left: 4px solid;
+    border-radius: 0 15px 15px 0;
+    padding: 25px 30px;
+    margin: 25px 0;
+    backdrop-filter: blur(10px);
+}
+
+.info-box h4 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.info-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-box li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.info-box li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: inherit;
+}
+
+/* Planet Detail Page Styles */
+.planet-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 30px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.planet-hero-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.planet-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.planet-sphere {
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    position: relative;
+    animation: planetRotate 20s linear infinite, float 6s ease-in-out infinite;
+}
+@keyframes planetRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.planet-info h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 15px;
+}
+
+.planet-info .planet-tagline {
+    font-size: 1.2rem;
+    color: #8899ff;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.planet-info p {
+    line-height: 1.8;
+    color: #c0c8ee;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+/* Data Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: rgba(20, 20, 50, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.data-table th {
+    background: rgba(100, 150, 255, 0.1);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: #00d4ff;
+}
+
+.data-table tr:hover {
+    background: rgba(100, 150, 255, 0.05);
+}
+
+/* Footer */
+footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(5, 5, 20, 0.95);
+    border-top: 1px solid rgba(100, 150, 255, 0.1);
+    padding: 50px 30px 30px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.group-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.member-tag {
+    background: rgba(100, 150, 255, 0.1);
+    border: 1px solid rgba(100, 150, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #a0a8ff;
+}
+
+.creator {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.creator-name {
+    font-family: 'Orbitron', sans-serif;
+    color: #00d4ff;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .planet-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .planet-sphere {
+        width: 200px; height: 200px;
+    }
+    .nav-links {
+        gap: 4px;
+    }
+    .nav-links a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Scroll animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Orbit animation for home page */
+.orbit-container {
+    position: relative;
+    width: 400px; height: 400px;
+    margin: 40px auto;
+}
+
+.orbit-ring {
+    position: absolute;
+    border: 1px solid rgba(100, 150, 255, 0.15);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-planet {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes orbit1 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg); } }
+@keyframes orbit2 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); } }
+@keyframes orbit3 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); } }
+@keyframes orbit4 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); } }
+
+.cta-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #00d4ff, #7b2dff);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+}
+
+/* Fun Fact Box */
+.fun-fact {
+    background: rgba(255, 200, 50, 0.08);
+    border: 1px solid rgba(255, 200, 50, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+}
+.fun-fact h4 {
+    color: #ffd700;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+}
+</style>
+
+</head>
+<body>
+    <div class="stars"></div>
+    
+<nav>
+    <div class="nav-container">
+        <div class="logo">🚀 IPA Group 1</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="">🏠 Home</a></li><li><a href="mercury.html" class="">☿ Mercury</a></li><li><a href="venus.html" class="active">♀ Venus</a></li><li><a href="earth.html" class="">⊕ Earth</a></li><li><a href="mars.html" class="">♂ Mars</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <section class="planet-hero">
+        <div class="planet-hero-grid">
+            <div class="planet-visual">
+                <div class="planet-sphere" style="background: radial-gradient(circle at 30% 30%, #fff8dc, #daa520, #b8860b, #8b6914); box-shadow: 0 0 80px rgba(218, 165, 32, 0.5), inset -30px -30px 60px rgba(0,0,0,0.5);"></div>
+            </div>
+            <div class="planet-info">
+                <h1 style="color: #daa520;">♀ Venus</h1>
+                <p class="planet-tagline">"Planet Terpanas dengan Efek Rumah Kaca yang Mematikan"</p>
+                <p>
+                    <strong>Venus</strong> adalah planet kedua dari Matahari dan sering disebut "kembaran Bumi" karena ukuran dan massanya yang hampir sama. Namun, di balik penampilannya yang indah sebagai bintang fajar atau bintang senja, Venus menyimpan rahasia yang sangat berbahaya.
+                </p>
+                <p>
+                    Venus adalah <strong>planet terpanas di Tata Surya</strong> — bahkan lebih panas dari Merkurius yang lebih dekat ke Matahari! Suhu permukaannya mencapai 464°C, cukup untuk melelehkan timah dan membuat planet ini tidak bisa dihuni.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title fade-in">🔬 Karakteristik Fisik</h2>
+
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-icon">🏠</div>
+                <h3>Efek Rumah Kaca Ekstrem</h3>
+                <p>Atmosfer Venus terdiri dari <strong>96,5% karbon dioksida (CO₂)</strong> dengan tekanan atmosfer 92 kali lebih besar dari Bumi. Lapisan awan tebal yang terdiri dari asam sulfat memantulkan 75% cahaya matahari, namun gas CO₂ menjebak panas, menciptakan efek rumah kaca yang sangat kuat.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🔄</div>
+                <h3>Rotasi Terbalik</h3>
+                <p>Venus berputar pada porosnya dalam arah <strong>terbalik</strong> (retrograde) dibanding planet lain. Ini berarti Matahari terbit di barat dan terbenam di timur! Satu hari di Venus lebih lama dari setahun di sana — rotasi membutuhkan 243 hari, sementara orbit hanya 225 hari.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🌋</div>
+                <h3>Permukaan Vulkanik</h3>
+                <p>Permukaan Venus didominasi oleh dataran vulkanik. Terdapat lebih dari <strong>1.600 gunung berapi besar</strong> yang telah teridentifikasi, dan banyak di antaranya masih aktif. Gunung berapi tertinggi, Maxwell Montes, memiliki ketinggian sekitar 11 km.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">☁️</div>
+                <h3>Awan Asam Sulfat</h3>
+                <p>Awan Venus tidak seperti awan di Bumi. Awan ini terbuat dari <strong>tetesan asam sulfat</strong> yang sangat korosif. Awan-awan ini bergerak sangat cepat — mengelilingi planet dalam waktu 4 hari Bumi — yang dikenal sebagai "super-rotasi atmosfer".</p>
+            </div>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #daa520;">
+            <h4 style="color: #daa520;">📊 Data Planet Venus</h4>
+            <table class="data-table">
+                <tr><th>Parameter</th><th>Nilai</th></tr>
+                <tr><td>Jarak dari Matahari</td><td>108,2 juta km (0,72 SA)</td></tr>
+                <tr><td>Diameter</td><td>12.104 km</td></tr>
+                <tr><td>Massa</td><td>4,867 × 10²⁴ kg (0,815× Bumi)</td></tr>
+                <tr><td>Kepadatan</td><td>5,24 g/cm³</td></tr>
+                <tr><td>Gravitasi Permukaan</td><td>8,87 m/s² (0,904× Bumi)</td></tr>
+                <tr><td>Periode Orbit</td><td>225 hari</td></tr>
+                <tr><td>Periode Rotasi</td><td>243 hari (retrograde)</td></tr>
+                <tr><td>Suhu Rata-rata Permukaan</td><td>464°C</td></tr>
+                <tr><td>Tekanan Atmosfer</td><td>92× tekanan Bumi</td></tr>
+                <tr><td>Jumlah Bulan</td><td>0</td></tr>
+            </table>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #ff6b6b;">
+            <h4 style="color: #ff6b6b;">🔍 Penjelasan Ilmiah: Mengapa Venus Sangat Panas?</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                Venus mengalami apa yang disebut <strong>"runaway greenhouse effect"</strong> (efek rumah kaca yang tak terkendali). Berikut mekanismenya:
+            </p>
+            <ul style="color: #c0c8ee; line-height: 1.8; margin-top: 10px;">
+                <li>Cahaya matahari menembus awan dan mencapai permukaan</li>
+                <li>Permukaan memanas dan memancarkan radiasi inframerah</li>
+                <li>CO₂ dalam atmosfer menyerap radiasi inframerah ini</li>
+                <li>Atmosfer memanas dan memancarkan kembali panas ke permukaan</li>
+                <li>Siklus ini terus berlanjut, menyebabkan suhu naik tanpa henti</li>
+                <li>Awan tebal mencegah panas keluar ke ruang angkasa</li>
+            </ul>
+            <p style="color: #c0c8ee; line-height: 1.8; margin-top: 15px;">
+                Venus adalah peringatan bagi Bumi tentang bahaya pemanasan global yang tidak terkendali. Jika Bumi mengalami efek rumah kaca yang sama, suhu permukaan bisa naik hingga titik di mana air laut akan mendidih!
+            </p>
+        </div>
+
+        <div class="fun-fact fade-in">
+            <h4>💡 Fakta Menarik tentang Venus</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                <strong>Venus mungkin pernah memiliki lautan!</strong> Beberapa ilmuwan percaya bahwa miliaran tahun lalu, Venus memiliki kondisi yang mirip dengan Bumi — dengan air cair di permukaan dan suhu yang lebih sejuk. Namun, pemanasan Matahari yang meningkat menyebabkan air menguap, dan uap air (yang juga merupakan gas rumah kaca) memperparah pemanasan hingga semua air hilang ke ruang angkasa. Ini adalah contoh nyata dari <em>"runaway greenhouse effect"</em>.
+            </p>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #00d4ff;">
+            <h4 style="color: #00d4ff;">🚀 Eksplorasi Venus</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                Venus adalah planet pertama yang dikunjungi oleh wahana antariksa (Mariner 2, 1962). Beberapa misi penting:
+            </p>
+            <ul style="color: #c0c8ee; line-height: 1.8; margin-top: 10px;">
+                <li><strong>Venera Program (Uni Soviet, 1961-1984):</strong> Satu-satunya wahana yang berhasil mendarat di permukaan Venus dan mengirimkan gambar. Venera 13 bertahan selama 127 menit di permukaan yang mematikan.</li>
+                <li><strong>Magellan (NASA, 1989-1994):</strong> Menggunakan radar untuk memetakan 98% permukaan Venus dengan resolusi tinggi.</li>
+                <li><strong>Akatsuki (JAXA, 2010-sekarang):</strong> Wahana Jepang yang mempelajari atmosfer dan cuaca Venus.</li>
+                <li><strong>DAVINCI+ & VERITAS (NASA, 2028-2030):</strong> Misi masa depan untuk mempelajari atmosfer dan permukaan Venus secara detail.</li>
+            </ul>
+        </div>
+    </section>
+
+    
+<footer>
+    <div class="footer-content">
+        <h3 style="font-family: 'Orbitron', sans-serif; margin-bottom: 15px; color: #fff;">👥 Group Members</h3>
+        <div class="group-members">
+            <span class="member-tag">Haikal Rizky Aditya</span>
+            <span class="member-tag">Ardan Rasendra Sutiko</span>
+            <span class="member-tag">Azka Putra Falevi</span>
+            <span class="member-tag">Diva Davit Prananda</span>
+            <span class="member-tag">Zacky Hilmi Falevi</span>
+            <span class="member-tag">Indah Priyanti Dewi Utami</span>
+            <span class="member-tag">Livatul Janah</span>
+            <span class="member-tag">Nafiza Clara Azkayra</span>
+        </div>
+        <div class="creator">
+            <p style="color: #6677cc; font-size: 0.9rem;">Website Created & Designed by</p>
+            <p class="creator-name">✨ Haikal Rizky Aditya ✨</p>
+        </div>
+        <p style="margin-top: 20px; color: #4455aa; font-size: 0.8rem;">© 2026 IPA Assignment Group 1, Class 7C — Inner Planets Exploration</p>
+    </div>
+</footer>
+
+    
+<script>
+// Generate stars
+document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.querySelector('.stars');
+    if (starsContainer) {
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+  </html>
