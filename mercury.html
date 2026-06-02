@@ -616,4 +616,556 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 </body>
+</html>}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #a0a8ff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fff;
+    background: rgba(100, 150, 255, 0.15);
+    border-color: rgba(100, 150, 255, 0.3);
+    box-shadow: 0 0 20px rgba(100, 150, 255, 0.2);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero-content .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #8899ff;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.hero-content .class-info {
+    font-size: 1.1rem;
+    color: #6677cc;
+    margin-bottom: 40px;
+}
+
+.hero-planet {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    margin: 30px auto;
+    position: relative;
+    box-shadow: 0 0 60px rgba(255, 200, 100, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Content Sections */
+.content-section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 30px;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    margin: 15px auto 0;
+}
+
+/* Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: rgba(20, 20, 50, 0.6);
+    border: 1px solid rgba(100, 150, 255, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(100, 150, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(100, 150, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.card p {
+    color: #a0a8cc;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(20, 25, 60, 0.7);
+    border-left: 4px solid;
+    border-radius: 0 15px 15px 0;
+    padding: 25px 30px;
+    margin: 25px 0;
+    backdrop-filter: blur(10px);
+}
+
+.info-box h4 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.info-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-box li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.info-box li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: inherit;
+}
+
+/* Planet Detail Page Styles */
+.planet-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 30px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.planet-hero-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.planet-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.planet-sphere {
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    position: relative;
+    animation: planetRotate 20s linear infinite, float 6s ease-in-out infinite;
+}
+@keyframes planetRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.planet-info h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 15px;
+}
+
+.planet-info .planet-tagline {
+    font-size: 1.2rem;
+    color: #8899ff;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.planet-info p {
+    line-height: 1.8;
+    color: #c0c8ee;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+/* Data Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: rgba(20, 20, 50, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.data-table th {
+    background: rgba(100, 150, 255, 0.1);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: #00d4ff;
+}
+
+.data-table tr:hover {
+    background: rgba(100, 150, 255, 0.05);
+}
+
+/* Footer */
+footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(5, 5, 20, 0.95);
+    border-top: 1px solid rgba(100, 150, 255, 0.1);
+    padding: 50px 30px 30px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.group-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.member-tag {
+    background: rgba(100, 150, 255, 0.1);
+    border: 1px solid rgba(100, 150, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #a0a8ff;
+}
+
+.creator {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(100, 150, 255, 0.1);
+}
+
+.creator-name {
+    font-family: 'Orbitron', sans-serif;
+    color: #00d4ff;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .planet-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .planet-sphere {
+        width: 200px; height: 200px;
+    }
+    .nav-links {
+        gap: 4px;
+    }
+    .nav-links a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Scroll animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Orbit animation for home page */
+.orbit-container {
+    position: relative;
+    width: 400px; height: 400px;
+    margin: 40px auto;
+}
+
+.orbit-ring {
+    position: absolute;
+    border: 1px solid rgba(100, 150, 255, 0.15);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-planet {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes orbit1 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg); } }
+@keyframes orbit2 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); } }
+@keyframes orbit3 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); } }
+@keyframes orbit4 { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); } }
+
+.cta-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #00d4ff, #7b2dff);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+}
+
+/* Fun Fact Box */
+.fun-fact {
+    background: rgba(255, 200, 50, 0.08);
+    border: 1px solid rgba(255, 200, 50, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+}
+.fun-fact h4 {
+    color: #ffd700;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+}
+</style>
+
+</head>
+<body>
+    <div class="stars"></div>
+    
+<nav>
+    <div class="nav-container">
+        <div class="logo">🚀 IPA Group 1</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="">🏠 Home</a></li><li><a href="mercury.html" class="active">☿ Mercury</a></li><li><a href="venus.html" class="">♀ Venus</a></li><li><a href="earth.html" class="">⊕ Earth</a></li><li><a href="mars.html" class="">♂ Mars</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <section class="planet-hero">
+        <div class="planet-hero-grid">
+            <div class="planet-visual">
+                <div class="planet-sphere" style="background: radial-gradient(circle at 30% 30%, #d4d4d4, #8a8a8a, #4a4a4a, #2a2a2a); box-shadow: 0 0 80px rgba(180, 180, 180, 0.4), inset -30px -30px 60px rgba(0,0,0,0.5);"></div>
+            </div>
+            <div class="planet-info">
+                <h1 style="color: #c0c0c0;">☿ Merkurius</h1>
+                <p class="planet-tagline">"Planet Terkecil yang Berlari Cepat Mengelilingi Matahari"</p>
+                <p>
+                    <strong>Merkurius</strong> adalah planet terdekat dengan Matahari dan planet terkecil di Tata Surya. Nama "Merkurius" berasal dari dewa Romawi yang dikenal sebagai utusan para dewa, yang sesuai dengan kecepatan orbit planet ini yang sangat cepat — hanya 88 hari Bumi untuk satu kali mengelilingi Matahari.
+                </p>
+                <p>
+                    Planet ini memiliki ukuran yang hampir sama dengan Bulan Bumi, dengan diameter sekitar 4.879 km. Permukaannya penuh dengan kawah yang menyerupai permukaan Bulan, menunjukkan bahwa Merkurius telah mengalami banyak tabrakan meteor selama miliaran tahun.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title fade-in">🔬 Karakteristik Fisik</h2>
+
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-icon">🌡️</div>
+                <h3>Suhu Ekstrem</h3>
+                <p>Suhu di Merkurius sangat ekstrem karena tidak memiliki atmosfer yang signifikan untuk menyimpan panas. Suhu siang hari bisa mencapai <strong>427°C</strong>, cukup panas untuk melelehkan timah! Namun di malam hari, suhu bisa turun drastis hingga <strong>-173°C</strong>.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🌑</div>
+                <h3>Tidak Memiliki Bulan</h3>
+                <p>Berbeda dengan Bumi yang memiliki satu bulan, Merkurius <strong>tidak memiliki satelit alami</strong> sama sekali. Gravitasi planet ini terlalu lemah untuk menangkap dan mempertahankan bulan.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🌀</div>
+                <h3>Rotasi yang Lambat</h3>
+                <p>Meskipun orbitnya cepat, Merkurius berputar sangat lambat pada porosnya. Satu hari di Merkurius (satu rotasi penuh) membutuhkan waktu <strong>59 hari Bumi</strong>. Karena rotasi ini, satu hari di Merkurius lebih lama dari setahun di sana!</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🏔️</div>
+                <h3>Permukaan Berbatu</h3>
+                <p>Permukaan Merkurius terdiri dari batuan silikat dan logam. Planet ini memiliki inti besi yang sangat besar — menyusun sekitar <strong>60% dari total massa planet</strong>, yang merupakan proporsi terbesar di antara semua planet di Tata Surya.</p>
+            </div>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #c0c0c0;">
+            <h4 style="color: #c0c0c0;">📊 Data Planet Merkurius</h4>
+            <table class="data-table">
+                <tr><th>Parameter</th><th>Nilai</th></tr>
+                <tr><td>Jarak dari Matahari</td><td>57,9 juta km (0,39 SA)</td></tr>
+                <tr><td>Diameter</td><td>4.879 km</td></tr>
+                <tr><td>Massa</td><td>3,285 × 10²³ kg (0,055× Bumi)</td></tr>
+                <tr><td>Kepadatan</td><td>5,43 g/cm³</td></tr>
+                <tr><td>Gravitasi Permukaan</td><td>3,7 m/s² (0,38× Bumi)</td></tr>
+                <tr><td>Periode Orbit</td><td>88 hari</td></tr>
+                <tr><td>Periode Rotasi</td><td>58,6 hari</td></tr>
+                <tr><td>Suhu Maksimum</td><td>427°C</td></tr>
+                <tr><td>Suhu Minimum</td><td>-173°C</td></tr>
+                <tr><td>Jumlah Bulan</td><td>0</td></tr>
+            </table>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #ff6b6b;">
+            <h4 style="color: #ff6b6b;">🔍 Penjelasan Ilmiah: Mengapa Suhu Merkurius Sangat Ekstrem?</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                Merkurius hanya memiliki atmosfer yang sangat tipis (eksosfer) terdiri dari atom-atom oksigen, natrium, hidrogen, helium, dan kalium yang tertangkap oleh gravitasi planet. Karena atmosfer yang sangat tipis ini:
+            </p>
+            <ul style="color: #c0c8ee; line-height: 1.8; margin-top: 10px;">
+                <li>Panas dari Matahari langsung mencapai permukaan tanpa disaring</li>
+                <li>Tidak ada gas untuk menyimpan dan mendistribusikan panas ke sisi malam</li>
+                <li>Sisi malam kehilangan panas dengan cepat ke ruang angkasa</li>
+                <li>Tidak ada efek rumah kaca seperti di Venus</li>
+            </ul>
+        </div>
+
+        <div class="fun-fact fade-in">
+            <h4>💡 Fakta Menarik tentang Merkurius</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                <strong>Merkurius menyusut!</strong> Planet ini sedang menciut sebesar beberapa kilometer selama 4 miliar tahun terakhir. Ini terjadi karena inti besinya yang besar sedang mendingin dan mengkerut, menyebabkan kerak planet berkerut seperti kulit apel yang kering. Fenomena ini disebut <em>"thermal contraction"</em>.
+            </p>
+        </div>
+
+        <div class="info-box fade-in" style="border-color: #00d4ff;">
+            <h4 style="color: #00d4ff;">🚀 Eksplorasi Merkurius</h4>
+            <p style="color: #c0c8ee; line-height: 1.8;">
+                Hanya dua wahana antariksa yang pernah mengunjungi Merkurius:
+            </p>
+            <ul style="color: #c0c8ee; line-height: 1.8; margin-top: 10px;">
+                <li><strong>Mariner 10 (NASA, 1974-1975):</strong> Wahana pertama yang mengunjungi Merkurius, mengambil gambar sekitar 45% permukaan planet.</li>
+                <li><strong>MESSENGER (NASA, 2011-2015):</strong> Mengorbit Merkurius selama 4 tahun dan memetakan seluruh permukaan planet dengan detail tinggi.</li>
+                <li><strong>BepiColombo (ESA/JAXA, 2018-launch):</strong> Misi gabungan Eropa-Jepang yang sedang dalam perjalanan dan dijadwalkan tiba pada tahun 2025.</li>
+            </ul>
+        </div>
+    </section>
+
+    
+<footer>
+    <div class="footer-content">
+        <h3 style="font-family: 'Orbitron', sans-serif; margin-bottom: 15px; color: #fff;">👥 Group Members</h3>
+        <div class="group-members">
+            <span class="member-tag">Haikal Rizky Aditya</span>
+            <span class="member-tag">Ardan Rasendra Sutiko</span>
+            <span class="member-tag">Azka Putra Falevi</span>
+            <span class="member-tag">Diva Davit Prananda</span>
+            <span class="member-tag">Zacky Hilmi Falevi</span>
+            <span class="member-tag">Indah Priyanti Dewi Utami</span>
+            <span class="member-tag">Livatul Janah</span>
+            <span class="member-tag">Nafiza Clara Azkayra</span>
+        </div>
+        <div class="creator">
+            <p style="color: #6677cc; font-size: 0.9rem;">Website Created & Designed by</p>
+            <p class="creator-name">✨ Haikal Rizky Aditya ✨</p>
+        </div>
+        <p style="margin-top: 20px; color: #4455aa; font-size: 0.8rem;">© 2026 IPA Assignment Group 1, Class 7C — Inner Planets Exploration</p>
+    </div>
+</footer>
+
+    
+<script>
+// Generate stars
+document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.querySelector('.stars');
+    if (starsContainer) {
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
                   </html>
